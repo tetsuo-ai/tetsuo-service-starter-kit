@@ -46,20 +46,21 @@ External World
 
 ### Ubuntu/WSL Setup
 
-These instructions are for Ubuntu (or a Ubuntu VM) or Ubuntu WSL.[^1]
+These instructions are for Ubuntu 22.04 LTS (Jammy Jellyfish) (or a Ubuntu VM) or Ubuntu WSL.[^1]
 
 [^1]: **WSL Note:** If you are using Ubuntu on Windows via WSL, please note that systemd is not enabled by default. As a result, service management commands using `systemctl` (e.g., starting Redis or the Tetsuo service) may not work until systemd is enabled in your WSL installation. For guidance on enabling systemd and other WSL-specific configurations, please consult the [official WSL documentation](https://docs.microsoft.com/en-us/windows/wsl/).
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/tetsuo-ai/tetsuo-service-starter-kit
-cd tetsuo-service-starter-kit
+sudo git clone https://github.com/tetsuo-ai/tetsuo-service-starter-kit /opt/tetsuo-service-starter-kit
 ```
 
 2. Run the provided Ubuntu setup script:
 ```bash
+sudo su
+cd tetsuo-service-starter-kit
 chmod +x scripts/ubuntu-setup.sh  
-sudo ./scripts/ubuntu-setup.sh
+./scripts/ubuntu-setup.sh
 ```
 This script will:
 
@@ -83,7 +84,10 @@ sudo systemctl start redis-server
 
 4. Test Redis connection:
 ```bash
-./test.sh
+sudo su tetsuo-service # switch to the tetsuo-service user
+source .venv/bin/activate # activate the virtual environment
+python3.11 -m tests.redis_test # should return "✨ All Redis tests passed" or
+python3.11 tests/redis_test.py # should return "✨ All Redis tests passed"
 ```
 
 5. Start the service:
@@ -150,8 +154,8 @@ brew services start redis
 
 7. Test Redis connection:
 ```bash
-python -m tests.redis_test # should return "✓ Redis connected" or
-python tests/redis_test.py # should return "✓ Redis connected"
+python -m tests.redis_test # should return "✨ All Redis tests passed" or
+python tests/redis_test.py # should return "✨ All Redis tests passed" 
 ``` 
 
 8. Start the service:
