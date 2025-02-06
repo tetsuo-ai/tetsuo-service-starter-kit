@@ -58,6 +58,7 @@ cd tetsuo-service-starter-kit
 
 2. Run the provided Ubuntu setup script:
 ```bash
+chmod +x scripts/ubuntu-setup.sh  
 sudo ./scripts/ubuntu-setup.sh
 ```
 This script will:
