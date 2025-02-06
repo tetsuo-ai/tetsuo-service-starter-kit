@@ -21,7 +21,14 @@ class Settings(BaseSettings):
 
     # Logging Settings
     LOG_LEVEL: str = "INFO"
-    LOG_FORMAT: str = "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
+    LOG_FORMAT: str = (
+        "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+        "<level>{level: <8}</level> | <cyan>{name}</cyan>:"
+        "<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
+    )
+
+    # Monitoring Settings
+    MIN_WHALE_USD: float = 1000.0
 
     class Config:
         case_sensitive = True
